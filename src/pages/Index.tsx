@@ -1,37 +1,25 @@
 
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
   Users, 
-  Calendar, 
-  Phone, 
-  MessageSquare, 
-  TrendingUp, 
-  FileText, 
-  Settings,
-  BarChart3,
-  MapPin,
-  Clock,
-  Target,
-  Zap,
-  Bell,
-  CheckCircle,
-  AlertCircle,
-  Star,
-  ThumbsUp,
   Briefcase,
-  PieChart,
-  Home,
   DollarSign,
-  Activity
+  Target,
+  Clock,
+  Activity,
+  CheckCircle,
+  Calendar,
+  TrendingUp,
+  Bell
 } from "lucide-react";
 import ClientEngagementDashboard from "@/components/ClientEngagementDashboard";
 import OperationsDashboard from "@/components/OperationsDashboard";
 import IntelligenceDashboard from "@/components/IntelligenceDashboard";
 import AdminControlCenter from "@/components/AdminControlCenter";
+import Sidebar from "@/components/Sidebar";
+import TopBar from "@/components/TopBar";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("overview");
@@ -45,344 +33,205 @@ const Index = () => {
     aiAutomationSavings: "127 hrs/month"
   };
 
+  const getPageTitle = () => {
+    switch (activeTab) {
+      case "engagement": return "Client Engagement Hub";
+      case "operations": return "Operations Center";
+      case "intelligence": return "Intelligence & Strategy";
+      case "admin": return "Admin Control Center";
+      default: return "Dashboard Overview";
+    }
+  };
+
+  const getPageSubtitle = () => {
+    switch (activeTab) {
+      case "engagement": return "AI-powered lead management and conversion tools";
+      case "operations": return "Automate documentation and deal tracking";
+      case "intelligence": return "Data-driven insights and market analytics";
+      case "admin": return "Configure AI agents and system settings";
+      default: return "Your real estate automation command center";
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
-      <div className="container mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between mb-4">
-            <div>
-              <h1 className="text-4xl font-bold text-slate-800 mb-2">Real Estate AI Command Center</h1>
-              <p className="text-slate-600 text-lg">Streamline your operations with intelligent automation</p>
-            </div>
-            <div className="flex items-center space-x-4">
-              <Badge variant="outline" className="bg-green-50 text-green-700 border-green-200">
-                <Activity className="w-4 h-4 mr-1" />
-                All Systems Active
-              </Badge>
-              <Button variant="outline" size="sm">
-                <Settings className="w-4 h-4 mr-2" />
-                Settings
-              </Button>
-            </div>
-          </div>
+    <div className="min-h-screen bg-gray-50 flex">
+      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+      
+      <div className="flex-1 flex flex-col">
+        <TopBar title={getPageTitle()} subtitle={getPageSubtitle()} />
+        
+        <main className="flex-1 p-6">
+          {activeTab === "overview" && (
+            <div className="space-y-6">
+              {/* Stats Grid */}
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                <Card className="bg-white">
+                  <CardContent className="p-4">
+                    <div className="flex items-center space-x-2">
+                      <Users className="w-5 h-5 text-blue-600" />
+                      <div>
+                        <p className="text-2xl font-bold text-gray-800">{dashboardStats.totalLeads}</p>
+                        <p className="text-sm text-gray-600">Total Leads</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
 
-          {/* Quick Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-6">
-            <Card className="border-0 shadow-sm bg-white/70 backdrop-blur-sm">
-              <CardContent className="p-4">
-                <div className="flex items-center space-x-2">
-                  <Users className="w-5 h-5 text-blue-600" />
-                  <div>
-                    <p className="text-2xl font-bold text-slate-800">{dashboardStats.totalLeads}</p>
-                    <p className="text-sm text-slate-600">Total Leads</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                <Card className="bg-white">
+                  <CardContent className="p-4">
+                    <div className="flex items-center space-x-2">
+                      <Briefcase className="w-5 h-5 text-orange-600" />
+                      <div>
+                        <p className="text-2xl font-bold text-gray-800">{dashboardStats.activeDeals}</p>
+                        <p className="text-sm text-gray-600">Active Deals</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
 
-            <Card className="border-0 shadow-sm bg-white/70 backdrop-blur-sm">
-              <CardContent className="p-4">
-                <div className="flex items-center space-x-2">
-                  <Briefcase className="w-5 h-5 text-orange-600" />
-                  <div>
-                    <p className="text-2xl font-bold text-slate-800">{dashboardStats.activeDeals}</p>
-                    <p className="text-sm text-slate-600">Active Deals</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                <Card className="bg-white">
+                  <CardContent className="p-4">
+                    <div className="flex items-center space-x-2">
+                      <DollarSign className="w-5 h-5 text-green-600" />
+                      <div>
+                        <p className="text-2xl font-bold text-gray-800">${(dashboardStats.monthlyRevenue / 1000).toFixed(0)}K</p>
+                        <p className="text-sm text-gray-600">Monthly Revenue</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
 
-            <Card className="border-0 shadow-sm bg-white/70 backdrop-blur-sm">
-              <CardContent className="p-4">
-                <div className="flex items-center space-x-2">
-                  <DollarSign className="w-5 h-5 text-green-600" />
-                  <div>
-                    <p className="text-2xl font-bold text-slate-800">${(dashboardStats.monthlyRevenue / 1000).toFixed(0)}K</p>
-                    <p className="text-sm text-slate-600">Monthly Revenue</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                <Card className="bg-white">
+                  <CardContent className="p-4">
+                    <div className="flex items-center space-x-2">
+                      <Target className="w-5 h-5 text-purple-600" />
+                      <div>
+                        <p className="text-2xl font-bold text-gray-800">{dashboardStats.conversionRate}%</p>
+                        <p className="text-sm text-gray-600">Conversion</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
 
-            <Card className="border-0 shadow-sm bg-white/70 backdrop-blur-sm">
-              <CardContent className="p-4">
-                <div className="flex items-center space-x-2">
-                  <Target className="w-5 h-5 text-purple-600" />
-                  <div>
-                    <p className="text-2xl font-bold text-slate-800">{dashboardStats.conversionRate}%</p>
-                    <p className="text-sm text-slate-600">Conversion</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                <Card className="bg-white">
+                  <CardContent className="p-4">
+                    <div className="flex items-center space-x-2">
+                      <Clock className="w-5 h-5 text-indigo-600" />
+                      <div>
+                        <p className="text-2xl font-bold text-gray-800">{dashboardStats.averageResponseTime}</p>
+                        <p className="text-sm text-gray-600">Avg Response</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
 
-            <Card className="border-0 shadow-sm bg-white/70 backdrop-blur-sm">
-              <CardContent className="p-4">
-                <div className="flex items-center space-x-2">
-                  <Clock className="w-5 h-5 text-indigo-600" />
-                  <div>
-                    <p className="text-2xl font-bold text-slate-800">{dashboardStats.averageResponseTime}</p>
-                    <p className="text-sm text-slate-600">Avg Response</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                <Card className="bg-white">
+                  <CardContent className="p-4">
+                    <div className="flex items-center space-x-2">
+                      <Activity className="w-5 h-5 text-yellow-600" />
+                      <div>
+                        <p className="text-2xl font-bold text-gray-800">127h</p>
+                        <p className="text-sm text-gray-600">AI Savings</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
 
-            <Card className="border-0 shadow-sm bg-white/70 backdrop-blur-sm">
-              <CardContent className="p-4">
-                <div className="flex items-center space-x-2">
-                  <Zap className="w-5 h-5 text-yellow-600" />
-                  <div>
-                    <p className="text-2xl font-bold text-slate-800">127h</p>
-                    <p className="text-sm text-slate-600">AI Savings</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
+              {/* Agent Cards Grid */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
+                  <CardHeader>
+                    <CardTitle className="flex items-center space-x-2 text-blue-800">
+                      <Users className="w-6 h-6" />
+                      <span>Lead Engagement Agent</span>
+                    </CardTitle>
+                    <CardDescription className="text-blue-600">
+                      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-green-100 text-green-800 mr-2">
+                        Active
+                      </span>
+                      AI-powered lead nurturing and conversion
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-blue-700 mb-4">
+                      Processing 24 leads today with 85% response rate. Auto-scheduled 12 appointments this week.
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-blue-600">Last activity: 2 min ago</span>
+                    </div>
+                  </CardContent>
+                </Card>
 
-        {/* Main Dashboard Tabs */}
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-5 mb-8 bg-white/80 backdrop-blur-sm border border-white/20">
-            <TabsTrigger value="overview" className="flex items-center space-x-2">
-              <Home className="w-4 h-4" />
-              <span>Overview</span>
-            </TabsTrigger>
-            <TabsTrigger value="engagement" className="flex items-center space-x-2">
-              <Users className="w-4 h-4" />
-              <span>Client Engagement</span>
-            </TabsTrigger>
-            <TabsTrigger value="operations" className="flex items-center space-x-2">
-              <Briefcase className="w-4 h-4" />
-              <span>Operations</span>
-            </TabsTrigger>
-            <TabsTrigger value="intelligence" className="flex items-center space-x-2">
-              <BarChart3 className="w-4 h-4" />
-              <span>Intelligence</span>
-            </TabsTrigger>
-            <TabsTrigger value="admin" className="flex items-center space-x-2">
-              <Settings className="w-4 h-4" />
-              <span>Admin</span>
-            </TabsTrigger>
-          </TabsList>
+                <Card className="bg-gradient-to-br from-orange-50 to-orange-100 border-orange-200">
+                  <CardHeader>
+                    <CardTitle className="flex items-center space-x-2 text-orange-800">
+                      <Briefcase className="w-6 h-6" />
+                      <span>Deal Management Agent</span>
+                    </CardTitle>
+                    <CardDescription className="text-orange-600">
+                      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-green-100 text-green-800 mr-2">
+                        Active
+                      </span>
+                      Automated deal tracking and documentation
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-orange-700 mb-4">
+                      Monitoring 23 active deals. Generated 15 documents this week. 3 deals approaching closure.
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-orange-600">Last update: 5 min ago</span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
 
-          <TabsContent value="overview" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {/* Quick Access Cards */}
-              <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-600 to-blue-700 text-white">
+              {/* Recent Activity */}
+              <Card className="bg-white">
                 <CardHeader>
-                  <CardTitle className="flex items-center space-x-2">
-                    <Users className="w-6 h-6" />
-                    <span>Client Engagement Hub</span>
-                  </CardTitle>
-                  <CardDescription className="text-blue-100">
-                    AI-powered lead management and conversion tools
-                  </CardDescription>
+                  <CardTitle>Recent Activity</CardTitle>
+                  <CardDescription>Latest updates from your AI agents</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="grid grid-cols-2 gap-4 mb-4">
-                    <div className="flex items-center space-x-2">
-                      <Calendar className="w-4 h-4" />
-                      <span className="text-sm">AI Scheduler</span>
+                  <div className="space-y-4">
+                    <div className="flex items-center space-x-4 p-3 rounded-lg bg-green-50 border border-green-200">
+                      <CheckCircle className="w-5 h-5 text-green-600" />
+                      <div className="flex-1">
+                        <p className="text-sm font-medium">New lead qualified by voice agent</p>
+                        <p className="text-xs text-gray-600">Sarah Johnson - 3 bedroom property inquiry</p>
+                      </div>
+                      <Badge variant="secondary">2 min ago</Badge>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <Phone className="w-4 h-4" />
-                      <span className="text-sm">Voice Agent</span>
+                    
+                    <div className="flex items-center space-x-4 p-3 rounded-lg bg-blue-50 border border-blue-200">
+                      <Calendar className="w-5 h-5 text-blue-600" />
+                      <div className="flex-1">
+                        <p className="text-sm font-medium">Appointment scheduled automatically</p>
+                        <p className="text-xs text-gray-600">Mike Chen - Property viewing tomorrow 2PM</p>
+                      </div>
+                      <Badge variant="secondary">5 min ago</Badge>
                     </div>
-                    <div className="flex items-center space-x-2">
-                      <Target className="w-4 h-4" />
-                      <span className="text-sm">Lead Scoring</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <FileText className="w-4 h-4" />
-                      <span className="text-sm">Ad Generator</span>
-                    </div>
-                  </div>
-                  <Button 
-                    variant="secondary" 
-                    className="w-full"
-                    onClick={() => setActiveTab("engagement")}
-                  >
-                    Open Dashboard
-                  </Button>
-                </CardContent>
-              </Card>
-
-              <Card className="border-0 shadow-lg bg-gradient-to-br from-orange-600 to-orange-700 text-white">
-                <CardHeader>
-                  <CardTitle className="flex items-center space-x-2">
-                    <Briefcase className="w-6 h-6" />
-                    <span>Operations Center</span>
-                  </CardTitle>
-                  <CardDescription className="text-orange-100">
-                    Automate documentation and deal tracking
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-2 gap-4 mb-4">
-                    <div className="flex items-center space-x-2">
-                      <CheckCircle className="w-4 h-4" />
-                      <span className="text-sm">Deal Tracker</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <FileText className="w-4 h-4" />
-                      <span className="text-sm">Auto Docs</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Activity className="w-4 h-4" />
-                      <span className="text-sm">Team Monitor</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Bell className="w-4 h-4" />
-                      <span className="text-sm">Alerts</span>
+                    
+                    <div className="flex items-center space-x-4 p-3 rounded-lg bg-purple-50 border border-purple-200">
+                      <TrendingUp className="w-5 h-5 text-purple-600" />
+                      <div className="flex-1">
+                        <p className="text-sm font-medium">Market trend alert generated</p>
+                        <p className="text-xs text-gray-600">Downtown area showing 15% price increase</p>
+                      </div>
+                      <Badge variant="secondary">10 min ago</Badge>
                     </div>
                   </div>
-                  <Button 
-                    variant="secondary" 
-                    className="w-full"
-                    onClick={() => setActiveTab("operations")}
-                  >
-                    Open Dashboard
-                  </Button>
-                </CardContent>
-              </Card>
-
-              <Card className="border-0 shadow-lg bg-gradient-to-br from-purple-600 to-purple-700 text-white">
-                <CardHeader>
-                  <CardTitle className="flex items-center space-x-2">
-                    <BarChart3 className="w-6 h-6" />
-                    <span>Intelligence & Strategy</span>
-                  </CardTitle>
-                  <CardDescription className="text-purple-100">
-                    Data-driven insights and market analytics
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-2 gap-4 mb-4">
-                    <div className="flex items-center space-x-2">
-                      <TrendingUp className="w-4 h-4" />
-                      <span className="text-sm">Market Trends</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <MapPin className="w-4 h-4" />
-                      <span className="text-sm">Price Prediction</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <PieChart className="w-4 h-4" />
-                      <span className="text-sm">Lead Insights</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Star className="w-4 h-4" />
-                      <span className="text-sm">Performance</span>
-                    </div>
-                  </div>
-                  <Button 
-                    variant="secondary" 
-                    className="w-full"
-                    onClick={() => setActiveTab("intelligence")}
-                  >
-                    Open Dashboard
-                  </Button>
-                </CardContent>
-              </Card>
-
-              <Card className="border-0 shadow-lg bg-gradient-to-br from-slate-600 to-slate-700 text-white">
-                <CardHeader>
-                  <CardTitle className="flex items-center space-x-2">
-                    <Settings className="w-6 h-6" />
-                    <span>Admin Control Center</span>
-                  </CardTitle>
-                  <CardDescription className="text-slate-100">
-                    Configure AI agents and system settings
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-2 gap-4 mb-4">
-                    <div className="flex items-center space-x-2">
-                      <Zap className="w-4 h-4" />
-                      <span className="text-sm">AI Agents</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Settings className="w-4 h-4" />
-                      <span className="text-sm">Configurations</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <BarChart3 className="w-4 h-4" />
-                      <span className="text-sm">Analytics</span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Bell className="w-4 h-4" />
-                      <span className="text-sm">Updates</span>
-                    </div>
-                  </div>
-                  <Button 
-                    variant="secondary" 
-                    className="w-full"
-                    onClick={() => setActiveTab("admin")}
-                  >
-                    Open Dashboard
-                  </Button>
                 </CardContent>
               </Card>
             </div>
+          )}
 
-            {/* Recent Activity */}
-            <Card className="border-0 shadow-lg bg-white/80 backdrop-blur-sm">
-              <CardHeader>
-                <CardTitle>Recent Activity</CardTitle>
-                <CardDescription>Latest updates across all systems</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="flex items-center space-x-4 p-3 rounded-lg bg-green-50 border border-green-200">
-                    <CheckCircle className="w-5 h-5 text-green-600" />
-                    <div className="flex-1">
-                      <p className="text-sm font-medium">New lead qualified by AI Voice Agent</p>
-                      <p className="text-xs text-slate-600">Sarah Johnson - 3 bedroom property inquiry</p>
-                    </div>
-                    <Badge variant="secondary">2 min ago</Badge>
-                  </div>
-                  
-                  <div className="flex items-center space-x-4 p-3 rounded-lg bg-blue-50 border border-blue-200">
-                    <Calendar className="w-5 h-5 text-blue-600" />
-                    <div className="flex-1">
-                      <p className="text-sm font-medium">Appointment scheduled automatically</p>
-                      <p className="text-xs text-slate-600">Mike Chen - Property viewing tomorrow 2PM</p>
-                    </div>
-                    <Badge variant="secondary">5 min ago</Badge>
-                  </div>
-                  
-                  <div className="flex items-center space-x-4 p-3 rounded-lg bg-purple-50 border border-purple-200">
-                    <TrendingUp className="w-5 h-5 text-purple-600" />
-                    <div className="flex-1">
-                      <p className="text-sm font-medium">Market trend alert generated</p>
-                      <p className="text-xs text-slate-600">Downtown area showing 15% price increase</p>
-                    </div>
-                    <Badge variant="secondary">10 min ago</Badge>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="engagement">
-            <ClientEngagementDashboard />
-          </TabsContent>
-
-          <TabsContent value="operations">
-            <OperationsDashboard />
-          </TabsContent>
-
-          <TabsContent value="intelligence">
-            <IntelligenceDashboard />
-          </TabsContent>
-
-          <TabsContent value="admin">
-            <AdminControlCenter />
-          </TabsContent>
-        </Tabs>
+          {activeTab === "engagement" && <ClientEngagementDashboard />}
+          {activeTab === "operations" && <OperationsDashboard />}
+          {activeTab === "intelligence" && <IntelligenceDashboard />}
+          {activeTab === "admin" && <AdminControlCenter />}
+        </main>
       </div>
     </div>
   );
