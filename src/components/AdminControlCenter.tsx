@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -10,7 +9,7 @@ import { Slider } from "@/components/ui/slider";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
-import { Settings, Zap, BarChart3, Bell, Users, Activity, CheckCircle, AlertCircle, Clock, Cpu, Database, Shield } from "lucide-react";
+import { Settings, Zap, BarChart3, Bell, Users, Activity, CheckCircle, AlertCircle, Clock, Cpu, Database, Shield, TrendingUp } from "lucide-react";
 
 const AdminControlCenter = () => {
   const [followUpFrequency, setFollowUpFrequency] = useState([3]);
