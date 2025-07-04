@@ -29,12 +29,6 @@ const Sidebar = ({ activeTab, setActiveTab }: SidebarProps) => {
 
   return (
     <div className="w-64 min-h-screen bg-white border-r border-gray-200 flex flex-col">
-      {/* Logo/Header */}
-      <div className="p-6 border-b border-gray-100">
-        <h2 className="text-xl font-bold text-gray-800">Real Estate AI</h2>
-        <p className="text-sm text-gray-500 mt-1">Command Center</p>
-      </div>
-
       {/* Navigation */}
       <nav className="flex-1 p-4">
         <ul className="space-y-2">

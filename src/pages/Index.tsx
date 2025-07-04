@@ -19,7 +19,6 @@ import OperationsDashboard from "@/components/OperationsDashboard";
 import IntelligenceDashboard from "@/components/IntelligenceDashboard";
 import AdminControlCenter from "@/components/AdminControlCenter";
 import Sidebar from "@/components/Sidebar";
-import TopBar from "@/components/TopBar";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("overview");
@@ -33,33 +32,11 @@ const Index = () => {
     aiAutomationSavings: "127 hrs/month"
   };
 
-  const getPageTitle = () => {
-    switch (activeTab) {
-      case "engagement": return "Client Engagement Hub";
-      case "operations": return "Operations Center";
-      case "intelligence": return "Intelligence & Strategy";
-      case "admin": return "Admin Control Center";
-      default: return "Dashboard Overview";
-    }
-  };
-
-  const getPageSubtitle = () => {
-    switch (activeTab) {
-      case "engagement": return "AI-powered lead management and conversion tools";
-      case "operations": return "Automate documentation and deal tracking";
-      case "intelligence": return "Data-driven insights and market analytics";
-      case "admin": return "Configure AI agents and system settings";
-      default: return "Your real estate automation command center";
-    }
-  };
-
   return (
     <div className="min-h-screen bg-gray-50 flex">
       <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
       
       <div className="flex-1 flex flex-col">
-        <TopBar title={getPageTitle()} subtitle={getPageSubtitle()} />
-        
         <main className="flex-1 p-6">
           {activeTab === "overview" && (
             <div className="space-y-6">
