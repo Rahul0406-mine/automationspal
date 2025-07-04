@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -66,23 +65,6 @@ const IntelligenceDashboard = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-3xl font-bold text-slate-800">Market Trends Dashboard</h2>
-          <p className="text-slate-600">Market intelligence and strategic insights for real estate decisions</p>
-        </div>
-        <div className="flex space-x-2">
-          <Button variant="outline">
-            <BarChart3 className="w-4 h-4 mr-2" />
-            Export Report
-          </Button>
-          <Button>
-            <Star className="w-4 h-4 mr-2" />
-            AI Insights
-          </Button>
-        </div>
-      </div>
-
       <Tabs defaultValue="market" className="w-full">
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="market">Market Trends</TabsTrigger>

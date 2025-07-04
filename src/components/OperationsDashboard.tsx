@@ -88,23 +88,6 @@ const OperationsDashboard = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-3xl font-bold text-slate-800">Operations & Process Automation</h2>
-          <p className="text-slate-600">Streamline workflows with intelligent automation and tracking</p>
-        </div>
-        <div className="flex space-x-2">
-          <Button variant="outline">
-            <Bell className="w-4 h-4 mr-2" />
-            Alerts
-          </Button>
-          <Button>
-            <Activity className="w-4 h-4 mr-2" />
-            Analytics
-          </Button>
-        </div>
-      </div>
-
       <Tabs defaultValue="deals" className="w-full">
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="deals">Deal Tracker</TabsTrigger>
