@@ -23,7 +23,7 @@ const Sidebar = ({ activeTab, setActiveTab }: SidebarProps) => {
     { id: "overview", label: "Dashboard", icon: Home },
     { id: "engagement", label: "Lead Management", icon: Users },
     { id: "operations", label: "Operations", icon: Briefcase },
-    { id: "intelligence", label: "Intelligence", icon: BarChart3 },
+    { id: "intelligence", label: "Market Trends", icon: BarChart3 },
     { id: "admin", label: "Admin Control", icon: Settings },
   ];
 
