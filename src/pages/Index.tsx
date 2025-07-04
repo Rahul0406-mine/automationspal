@@ -13,12 +13,9 @@ import {
   Calendar,
   TrendingUp,
   Bell,
-  MessageSquare,
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger
+  MessageSquare
 } from "lucide-react";
-import { HoverCard } from "@/components/ui/hover-card";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import OperationsDashboard from "@/components/OperationsDashboard";
 import IntelligenceDashboard from "@/components/IntelligenceDashboard";
 import AdminControlCenter from "@/components/AdminControlCenter";
