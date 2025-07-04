@@ -21,7 +21,7 @@ interface SidebarProps {
 const Sidebar = ({ activeTab, setActiveTab }: SidebarProps) => {
   const menuItems = [
     { id: "overview", label: "Dashboard", icon: Home },
-    { id: "engagement", label: "Client Engagement", icon: Users },
+    { id: "engagement", label: "Lead Management", icon: Users },
     { id: "operations", label: "Operations", icon: Briefcase },
     { id: "intelligence", label: "Intelligence", icon: BarChart3 },
     { id: "admin", label: "Admin Control", icon: Settings },

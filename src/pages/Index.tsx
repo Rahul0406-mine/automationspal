@@ -1,7 +1,7 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { 
   Users, 
   Briefcase,
@@ -12,13 +12,18 @@ import {
   CheckCircle,
   Calendar,
   TrendingUp,
-  Bell
+  Bell,
+  MessageSquare,
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger
 } from "lucide-react";
-import ClientEngagementDashboard from "@/components/ClientEngagementDashboard";
+import { HoverCard } from "@/components/ui/hover-card";
 import OperationsDashboard from "@/components/OperationsDashboard";
 import IntelligenceDashboard from "@/components/IntelligenceDashboard";
 import AdminControlCenter from "@/components/AdminControlCenter";
 import Sidebar from "@/components/Sidebar";
+import LeadManagementDashboard from "@/components/LeadManagementDashboard";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("overview");
@@ -30,6 +35,26 @@ const Index = () => {
     conversionRate: 24.5,
     averageResponseTime: "2.3 min",
     aiAutomationSavings: "127 hrs/month"
+  };
+
+  const recentClosedDeal = {
+    clientName: "Sarah Johnson",
+    propertyAddress: "123 Oak Street, Downtown",
+    dealValue: "$450,000",
+    closedDate: "Dec 18, 2024",
+    totalTimeToClose: "18 days",
+    leadSource: "Cold Call",
+    timeline: [
+      { step: "Lead Generation (Cold Call)", agent: "Voice Agent", duration: "2 hours", date: "Nov 30, 2024", details: "Initial contact made through AI cold calling system. Client showed interest in 3BR properties in downtown area." },
+      { step: "Lead Qualification", agent: "Lead Scoring Agent", duration: "30 minutes", date: "Nov 30, 2024", details: "Lead scored 95/100 based on budget match, location preference, and urgency indicators." },
+      { step: "Appointment Scheduling", agent: "Scheduler Agent", duration: "15 minutes", date: "Dec 1, 2024", details: "Property viewing scheduled for Dec 3, 2024 at 2:00 PM through automated scheduling system." },
+      { step: "Property Viewing", agent: "Human Agent", duration: "1.5 hours", date: "Dec 3, 2024", details: "Client toured the property, showed strong interest, discussed financing options." },
+      { step: "Offer Preparation", agent: "Deal Management Agent", duration: "2 hours", date: "Dec 4, 2024", details: "Purchase agreement drafted, market analysis conducted, offer strategy developed." },
+      { step: "Negotiation", agent: "Human Agent + AI Support", duration: "3 days", date: "Dec 5-8, 2024", details: "Multiple counteroffers exchanged, AI assisted with market data and pricing strategy." },
+      { step: "Contract Execution", agent: "Document Agent", duration: "4 hours", date: "Dec 9, 2024", details: "Legal documents prepared, e-signatures collected, terms finalized." },
+      { step: "Inspection & Financing", agent: "Process Agent", duration: "7 days", date: "Dec 10-17, 2024", details: "Home inspection coordinated, mortgage processing tracked, final walkthrough scheduled." },
+      { step: "Closing", agent: "Human Agent", duration: "2 hours", date: "Dec 18, 2024", details: "Final documents signed, keys transferred, deal officially closed." }
+    ]
   };
 
   return (
@@ -115,96 +140,107 @@ const Index = () => {
                 </Card>
               </div>
 
-              {/* Agent Cards Grid */}
+              {/* Interactive Inboxes */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
                   <CardHeader>
                     <CardTitle className="flex items-center space-x-2 text-blue-800">
-                      <Users className="w-6 h-6" />
-                      <span>Lead Engagement Agent</span>
+                      <MessageSquare className="w-6 h-6" />
+                      <span>Chief Operating Agent</span>
                     </CardTitle>
-                    <CardDescription className="text-blue-600">
-                      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-green-100 text-green-800 mr-2">
-                        Active
-                      </span>
-                      AI-powered lead nurturing and conversion
-                    </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm text-blue-700 mb-4">
-                      Processing 24 leads today with 85% response rate. Auto-scheduled 12 appointments this week.
-                    </p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs text-blue-600">Last activity: 2 min ago</span>
+                    <div className="space-y-4">
+                      <div className="bg-white p-4 rounded-lg border-l-4 border-blue-500">
+                        <p className="text-sm text-gray-700 mb-2"><strong>System Message:</strong></p>
+                        <p className="text-sm text-gray-600">
+                          I am your Chief Operating Agent, responsible for controlling and coordinating all AI agent actions across your real estate operations. I manage workflow automation, agent task assignments, and ensure seamless integration between lead generation, client management, and deal processing systems.
+                        </p>
+                      </div>
+                      <Button className="w-full" size="sm">
+                        <MessageSquare className="w-4 h-4 mr-2" />
+                        Send Message
+                      </Button>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card className="bg-gradient-to-br from-orange-50 to-orange-100 border-orange-200">
+                <Card className="bg-gradient-to-br from-green-50 to-green-100 border-green-200">
                   <CardHeader>
-                    <CardTitle className="flex items-center space-x-2 text-orange-800">
-                      <Briefcase className="w-6 h-6" />
-                      <span>Deal Management Agent</span>
+                    <CardTitle className="flex items-center space-x-2 text-green-800">
+                      <TrendingUp className="w-6 h-6" />
+                      <span>Chief Management Agent</span>
                     </CardTitle>
-                    <CardDescription className="text-orange-600">
-                      <span className="inline-flex items-center px-2 py-1 rounded-full text-xs bg-green-100 text-green-800 mr-2">
-                        Active
-                      </span>
-                      Automated deal tracking and documentation
-                    </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm text-orange-700 mb-4">
-                      Monitoring 23 active deals. Generated 15 documents this week. 3 deals approaching closure.
-                    </p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs text-orange-600">Last update: 5 min ago</span>
+                    <div className="space-y-4">
+                      <div className="bg-white p-4 rounded-lg border-l-4 border-green-500">
+                        <p className="text-sm text-gray-700 mb-2"><strong>System Message:</strong></p>
+                        <p className="text-sm text-gray-600">
+                          I am your Chief Management Agent, overseeing the performance and efficiency of all AI agents in your system. I monitor KPIs, analyze agent effectiveness, track conversion rates, and provide strategic insights to optimize your real estate operations and maximize ROI.
+                        </p>
+                      </div>
+                      <Button className="w-full" size="sm">
+                        <TrendingUp className="w-4 h-4 mr-2" />
+                        View Analytics
+                      </Button>
                     </div>
                   </CardContent>
                 </Card>
               </div>
 
-              {/* Recent Activity */}
+              {/* Recent Closed Deal */}
               <Card className="bg-white">
                 <CardHeader>
-                  <CardTitle>Recent Activity</CardTitle>
-                  <CardDescription>Latest updates from your AI agents</CardDescription>
+                  <CardTitle>Most Recent Closed Deal</CardTitle>
+                  <CardDescription>Latest successful conversion from lead to client</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="space-y-4">
-                    <div className="flex items-center space-x-4 p-3 rounded-lg bg-green-50 border border-green-200">
-                      <CheckCircle className="w-5 h-5 text-green-600" />
-                      <div className="flex-1">
-                        <p className="text-sm font-medium">New lead qualified by voice agent</p>
-                        <p className="text-xs text-gray-600">Sarah Johnson - 3 bedroom property inquiry</p>
-                      </div>
-                      <Badge variant="secondary">2 min ago</Badge>
-                    </div>
-                    
-                    <div className="flex items-center space-x-4 p-3 rounded-lg bg-blue-50 border border-blue-200">
-                      <Calendar className="w-5 h-5 text-blue-600" />
-                      <div className="flex-1">
-                        <p className="text-sm font-medium">Appointment scheduled automatically</p>
-                        <p className="text-xs text-gray-600">Mike Chen - Property viewing tomorrow 2PM</p>
-                      </div>
-                      <Badge variant="secondary">5 min ago</Badge>
-                    </div>
-                    
-                    <div className="flex items-center space-x-4 p-3 rounded-lg bg-purple-50 border border-purple-200">
-                      <TrendingUp className="w-5 h-5 text-purple-600" />
-                      <div className="flex-1">
-                        <p className="text-sm font-medium">Market trend alert generated</p>
-                        <p className="text-xs text-gray-600">Downtown area showing 15% price increase</p>
-                      </div>
-                      <Badge variant="secondary">10 min ago</Badge>
-                    </div>
+                    <HoverCard>
+                      <HoverCardTrigger asChild>
+                        <div className="p-4 rounded-lg bg-green-50 border border-green-200 cursor-pointer hover:bg-green-100 transition-colors">
+                          <div className="flex items-center justify-between">
+                            <div>
+                              <h4 className="font-semibold text-lg">{recentClosedDeal.clientName}</h4>
+                              <p className="text-gray-600">{recentClosedDeal.propertyAddress}</p>
+                              <p className="text-sm text-gray-500">Closed on {recentClosedDeal.closedDate}</p>
+                            </div>
+                            <div className="text-right">
+                              <p className="text-2xl font-bold text-green-600">{recentClosedDeal.dealValue}</p>
+                              <p className="text-sm text-gray-600">{recentClosedDeal.totalTimeToClose} to close</p>
+                            </div>
+                          </div>
+                        </div>
+                      </HoverCardTrigger>
+                      <HoverCardContent className="w-96 max-h-96 overflow-y-auto">
+                        <div className="space-y-4">
+                          <div className="border-b pb-2">
+                            <h4 className="font-semibold">Deal Timeline - {recentClosedDeal.clientName}</h4>
+                            <p className="text-sm text-gray-600">Lead Source: {recentClosedDeal.leadSource} | Total Time: {recentClosedDeal.totalTimeToClose}</p>
+                          </div>
+                          <div className="space-y-3">
+                            {recentClosedDeal.timeline.map((step, index) => (
+                              <div key={index} className="border-l-2 border-blue-200 pl-4">
+                                <div className="flex justify-between items-start mb-1">
+                                  <h5 className="font-medium text-sm">{step.step}</h5>
+                                  <span className="text-xs text-gray-500">{step.duration}</span>
+                                </div>
+                                <p className="text-xs text-blue-600 mb-1">{step.agent} • {step.date}</p>
+                                <p className="text-xs text-gray-600">{step.details}</p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </HoverCardContent>
+                    </HoverCard>
                   </div>
                 </CardContent>
               </Card>
             </div>
           )}
 
-          {activeTab === "engagement" && <ClientEngagementDashboard />}
+          {activeTab === "engagement" && <LeadManagementDashboard />}
           {activeTab === "operations" && <OperationsDashboard />}
           {activeTab === "intelligence" && <IntelligenceDashboard />}
           {activeTab === "admin" && <AdminControlCenter />}
