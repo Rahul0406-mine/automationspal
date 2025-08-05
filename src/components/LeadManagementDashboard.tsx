@@ -29,11 +29,13 @@ import {
 } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
+import BookCallModal from "@/components/BookCallModal";
 
 const LeadManagementDashboard = () => {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
   const [isAgentSettingsOpen, setIsAgentSettingsOpen] = useState(false);
   const [isCreateCampaignOpen, setIsCreateCampaignOpen] = useState(false);
+  const [isBookCallModalOpen, setIsBookCallModalOpen] = useState(false);
 
   // Sample data for appointments
   const appointments = {
@@ -285,11 +287,11 @@ const LeadManagementDashboard = () => {
                   </div>
 
                   <div className="flex space-x-2">
-                    <Button className="flex-1">
+                    <Button className="flex-1" onClick={() => setIsBookCallModalOpen(true)}>
                       <Bot className="w-4 h-4 mr-2" />
                       AI Schedule
                     </Button>
-                    <Button variant="outline" className="flex-1">
+                    <Button variant="outline" className="flex-1" onClick={() => setIsBookCallModalOpen(true)}>
                       <Plus className="w-4 h-4 mr-2" />
                       Manual Book
                     </Button>
@@ -350,7 +352,7 @@ const LeadManagementDashboard = () => {
                                 </div>
                                 <Dialog>
                                   <DialogTrigger asChild>
-                                    <Button size="sm" variant="outline">More Details</Button>
+                                    <Button size="sm" variant="outline" onClick={() => setIsBookCallModalOpen(true)}>More Details</Button>
                                   </DialogTrigger>
                                   <DialogContent>
                                     <DialogHeader>
@@ -408,17 +410,17 @@ const LeadManagementDashboard = () => {
                                 <div>
                                   <Label>Contact List</Label>
                                   <div className="flex space-x-2">
-                                    <Button variant="outline" className="flex-1">
+                                    <Button variant="outline" className="flex-1" onClick={() => setIsBookCallModalOpen(true)}>
                                       <Upload className="w-4 h-4 mr-2" />
                                       Upload CSV
                                     </Button>
-                                    <Button variant="outline" className="flex-1">
+                                    <Button variant="outline" className="flex-1" onClick={() => setIsBookCallModalOpen(true)}>
                                       <Link className="w-4 h-4 mr-2" />
                                       External Source
                                     </Button>
                                   </div>
                                 </div>
-                                <Button className="w-full">Create Campaign</Button>
+                                <Button className="w-full" onClick={() => setIsBookCallModalOpen(true)}>Create Campaign</Button>
                               </div>
                             </DialogContent>
                           </Dialog>
@@ -558,6 +560,7 @@ const LeadManagementDashboard = () => {
           </div>
         </TabsContent>
       </Tabs>
+      <BookCallModal open={isBookCallModalOpen} onOpenChange={setIsBookCallModalOpen} />
     </div>
   );
 };

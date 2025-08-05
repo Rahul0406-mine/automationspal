@@ -1,4 +1,5 @@
 
+import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -6,8 +7,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { TrendingUp, MapPin, PieChart, BarChart3, DollarSign, Home, Users, Target, Activity, Star, AlertCircle, CheckCircle } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, AreaChart, Area } from "recharts";
+import BookCallModal from "@/components/BookCallModal";
 
 const IntelligenceDashboard = () => {
+  const [isBookCallModalOpen, setIsBookCallModalOpen] = useState(false);
   const marketTrendData = [
     { month: 'Jan', price: 425000, volume: 45, forecast: 435000 },
     { month: 'Feb', price: 438000, volume: 52, forecast: 445000 },
@@ -72,11 +75,11 @@ const IntelligenceDashboard = () => {
           <p className="text-slate-600">Market intelligence and strategic insights for real estate decisions</p>
         </div>
         <div className="flex space-x-2">
-          <Button variant="outline">
+          <Button variant="outline" onClick={() => setIsBookCallModalOpen(true)}>
             <BarChart3 className="w-4 h-4 mr-2" />
             Export Report
           </Button>
-          <Button>
+          <Button onClick={() => setIsBookCallModalOpen(true)}>
             <Star className="w-4 h-4 mr-2" />
             AI Insights
           </Button>
@@ -283,7 +286,7 @@ const IntelligenceDashboard = () => {
                       <Badge variant="outline" className="text-xs">
                         Impact: {insight.impact}
                       </Badge>
-                      <Button size="sm" variant="outline">
+                      <Button size="sm" variant="outline" onClick={() => setIsBookCallModalOpen(true)}>
                         View Details
                       </Button>
                     </div>
@@ -360,6 +363,7 @@ const IntelligenceDashboard = () => {
           </div>
         </TabsContent>
       </Tabs>
+      <BookCallModal open={isBookCallModalOpen} onOpenChange={setIsBookCallModalOpen} />
     </div>
   );
 };

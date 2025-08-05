@@ -21,9 +21,11 @@ import IntelligenceDashboard from "@/components/IntelligenceDashboard";
 import AdminControlCenter from "@/components/AdminControlCenter";
 import Sidebar from "@/components/Sidebar";
 import LeadManagementDashboard from "@/components/LeadManagementDashboard";
+import BookCallModal from "@/components/BookCallModal";
 
 const Index = () => {
   const [activeTab, setActiveTab] = useState("overview");
+  const [isBookCallModalOpen, setIsBookCallModalOpen] = useState(false);
 
   const dashboardStats = {
     totalLeads: 147,
@@ -154,7 +156,7 @@ const Index = () => {
                           I am your Chief Operating Agent, responsible for controlling and coordinating all AI agent actions across your real estate operations. I manage workflow automation, agent task assignments, and ensure seamless integration between lead generation, client management, and deal processing systems.
                         </p>
                       </div>
-                      <Button className="w-full" size="sm">
+                      <Button className="w-full" size="sm" onClick={() => setIsBookCallModalOpen(true)}>
                         <MessageSquare className="w-4 h-4 mr-2" />
                         Send Message
                       </Button>
@@ -177,7 +179,7 @@ const Index = () => {
                           I am your Chief Management Agent, overseeing the performance and efficiency of all AI agents in your system. I monitor KPIs, analyze agent effectiveness, track conversion rates, and provide strategic insights to optimize your real estate operations and maximize ROI.
                         </p>
                       </div>
-                      <Button className="w-full" size="sm">
+                      <Button className="w-full" size="sm" onClick={() => setIsBookCallModalOpen(true)}>
                         <TrendingUp className="w-4 h-4 mr-2" />
                         View Analytics
                       </Button>
@@ -243,6 +245,7 @@ const Index = () => {
           {activeTab === "admin" && <AdminControlCenter />}
         </main>
       </div>
+      <BookCallModal open={isBookCallModalOpen} onOpenChange={setIsBookCallModalOpen} />
     </div>
   );
 };

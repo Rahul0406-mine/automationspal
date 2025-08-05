@@ -5,9 +5,11 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CheckCircle, FileText, Activity, Bell, Clock, AlertCircle, Users, TrendingUp, Briefcase, Upload, Download, Eye, Edit, Trash2 } from "lucide-react";
+import BookCallModal from "@/components/BookCallModal";
 
 const OperationsDashboard = () => {
   const [selectedDeal, setSelectedDeal] = useState(null);
+  const [isBookCallModalOpen, setIsBookCallModalOpen] = useState(false);
 
   const deals = [
     { 
@@ -94,11 +96,11 @@ const OperationsDashboard = () => {
           <p className="text-slate-600">Streamline workflows with intelligent automation and tracking</p>
         </div>
         <div className="flex space-x-2">
-          <Button variant="outline">
+          <Button variant="outline" onClick={() => setIsBookCallModalOpen(true)}>
             <Bell className="w-4 h-4 mr-2" />
             Alerts
           </Button>
-          <Button>
+          <Button onClick={() => setIsBookCallModalOpen(true)}>
             <Activity className="w-4 h-4 mr-2" />
             Analytics
           </Button>
@@ -176,11 +178,11 @@ const OperationsDashboard = () => {
                         <p className="font-medium">{deal.daysToClose} days</p>
                       </div>
                       <div className="flex space-x-2">
-                        <Button size="sm" variant="outline">
+                        <Button size="sm" variant="outline" onClick={() => setIsBookCallModalOpen(true)}>
                           <Eye className="w-4 h-4 mr-1" />
                           View
                         </Button>
-                        <Button size="sm" variant="outline">
+                        <Button size="sm" variant="outline" onClick={() => setIsBookCallModalOpen(true)}>
                           <Edit className="w-4 h-4 mr-1" />
                           Update
                         </Button>
@@ -228,11 +230,11 @@ const OperationsDashboard = () => {
                 </div>
                 
                 <div className="flex space-x-2">
-                  <Button className="flex-1">
+                  <Button className="flex-1" onClick={() => setIsBookCallModalOpen(true)}>
                     <Upload className="w-4 h-4 mr-2" />
                     Generate Document
                   </Button>
-                  <Button variant="outline" className="flex-1">
+                  <Button variant="outline" className="flex-1" onClick={() => setIsBookCallModalOpen(true)}>
                     <FileText className="w-4 h-4 mr-2" />
                     Templates
                   </Button>
@@ -258,7 +260,7 @@ const OperationsDashboard = () => {
                         <Badge className={getDocumentStatusColor(doc.status)}>
                           {doc.status}
                         </Badge>
-                        <Button size="sm" variant="outline">
+                        <Button size="sm" variant="outline" onClick={() => setIsBookCallModalOpen(true)}>
                           <Eye className="w-4 h-4" />
                         </Button>
                       </div>
@@ -340,11 +342,11 @@ const OperationsDashboard = () => {
                       <p className="font-bold text-red-600">{employee.tasksOverdue || 0}</p>
                     </div>
                     <div className="flex space-x-2">
-                      <Button size="sm" variant="outline">
+                      <Button size="sm" variant="outline" onClick={() => setIsBookCallModalOpen(true)}>
                         <Eye className="w-4 h-4 mr-1" />
                         Details
                       </Button>
-                      <Button size="sm" variant="outline">
+                      <Button size="sm" variant="outline" onClick={() => setIsBookCallModalOpen(true)}>
                         <Activity className="w-4 h-4 mr-1" />
                         Tasks
                       </Button>
@@ -356,6 +358,7 @@ const OperationsDashboard = () => {
           </div>
         </TabsContent>
       </Tabs>
+      <BookCallModal open={isBookCallModalOpen} onOpenChange={setIsBookCallModalOpen} />
     </div>
   );
 };
